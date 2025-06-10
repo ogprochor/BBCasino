@@ -1,0 +1,9 @@
+
+services:
+  - type: web
+    name: kasyno-online
+    env: ruby
+    plan: free
+    buildCommand: "bundle install && yarn install && bundle exec rake db:migrate"
+    startCommand: "bundle exec rails server -p $PORT"
+    branch: master
