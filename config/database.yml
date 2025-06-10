@@ -24,3 +24,9 @@ production:
   database: kasyno_production
   username: <%= ENV['PGUSER'] %>
   password: <%= ENV['PGPASSWORD'] %>
+
+  cable:
+    <<: *default
+    database: kasyno_production
+    username: <%= ENV['PGUSER'] %>
+    password: <%= ENV['PGPASSWORD'] %>
