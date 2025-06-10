@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kasyno Online</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header>
+      <h1>🎰 Kasyno Online 🎰</h1>
+      <nav>
+	<%= link_to "🏠 Strona główna", root_path %> |
+        <%= link_to "Blackjack ♠️", blackjack_path %> |
+        <%= link_to "Ruletka 🎲", roulette_path %> |
+        <%= link_to "Jednoręki bandyta 🎰", slots_path %>
+      </nav>
+    </header>
+    <% if current_user %>
+  <div class="user-panel">
+    <button id="user-toggle" class="user-button">
+      <%= image_tag(
+        current_user.avatar.attached? ? url_for(current_user.avatar) : asset_path("default_avatar.png"),
+        class: "user-avatar"
+      ) %>
+      <span class="user-name"><%= current_user.username || current_user.email %></span>
+      ⏷
+    </button>
+
+    <div id="user-menu" class="user-menu hidden">
+      <turbo-frame id="user-balance">
+        <p>💰 Saldo: <%= current_user.wallet&.balance || 0 %> żetonów</p>
+      </turbo-frame>
+      <%= link_to "👤 Moje konto", account_path, class: "user-link" %>
+      <%= link_to "⚙️ Edytuj profil", edit_user_registration_path, class: "user-link" %>
+      <%= button_to "🚪 Wyloguj", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "user-link" %>
+    </div>
+  </div>
+<% else %>
+  <div class="user-panel">
+    <%= link_to "🔑 Zaloguj", new_user_session_path, class: "user-login" %>
+  </div>
+<% end %>
+
+
+</div>
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Kasyno Online</p>
+    </footer>
+<script>
+  console.log("🚀 JS załadowany");
+  document.addEventListener("turbo:load", function () {
+    const toggle = document.getElementById("user-toggle");
+    const menu = document.getElementById("user-menu");
+
+    if (toggle && menu) {
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("show");
+        menu.classList.toggle("hidden");
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+          menu.classList.add("hidden");
+          menu.classList.remove("show");
+        }
+      });
+    }
+  });
+</script>
+  </body>
+</html>

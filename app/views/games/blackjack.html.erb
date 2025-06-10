@@ -1,0 +1,54 @@
+<h1>🃏 Blackjack</h1>
+
+<% if current_user %>
+  <p><strong>Saldo:</strong> 💰 <%= current_user.wallet&.balance || 0 %> żetonów</p>
+
+  <% if @player_cards.blank? %>
+    <%= form_with url: blackjack_deal_path, method: :post, local: true do %>
+      <label>Zakład:</label><br>
+      <%= number_field_tag :bet, 10, min: 1 %><br><br>
+      <%= submit_tag "Rozdaj karty", class: "spin-button" %>
+    <% end %>
+  <% else %>
+    <p><strong>Twoje karty:</strong> <%= @player_cards.join(', ') %> (suma: <%= @player_cards.sum %>)</p>
+    <p><strong>Karty krupiera:</strong> <%= @dealer_cards.join(', ') %> (suma: <%= @dealer_cards.sum %>)</p>
+
+    <% unless @result %>
+      <%= button_to "Dobierz kartę", blackjack_hit_path, method: :post, class: "spin-button" %>
+      <%= button_to "Zatrzymaj się", blackjack_stand_path, method: :post, class: "spin-button" %>
+    <% end %>
+
+    <% if @result %>
+      <p class="result"><%= @result %></p>
+      <%= button_to "Zagraj ponownie", blackjack_deal_path, method: :post, class: "spin-button" %>
+    <% end %>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <p class="result"><%= flash[:notice] %></p>
+  <% end %>
+<% else %>
+  <p>Musisz być zalogowany, aby zagrać w blackjacka.</p>
+<% end %>
+
+<style>
+  .spin-button {
+    padding: 10px 30px;
+    font-size: 1.1em;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .spin-button:hover {
+    background-color: #1976D2;
+  }
+
+  .result {
+    margin-top: 20px;
+    font-size: 1.4em;
+    color: gold;
+  }
+</style>

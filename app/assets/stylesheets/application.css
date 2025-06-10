@@ -1,0 +1,113 @@
+body {
+  background-color: #1c1c1c;
+  color: #f2f2f2;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: #111;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+}
+
+header h1 {
+  color: gold;
+  margin-bottom: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: gold;
+}
+
+main {
+  padding: 40px;
+}
+
+footer {
+  background-color: #111;
+  color: #aaa;
+  padding: 0.01px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.user-panel {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.user-button {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.user-button:hover {
+  background: #444;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid white;
+}
+
+.user-menu.hidden {
+  display: none;
+}
+
+.user-menu {
+  background: #222;
+  border: 2px solid #555;
+  color: #fff;
+  padding: 10px;
+  margin-top: 5px;
+  position: absolute;
+  right: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.user-menu.show {
+  display: block;
+}
+
+.user-link {
+  display: block;
+  margin: 5px 0;
+  color: #eee;
+  text-decoration: none;
+}
+
+.user-link:hover {
+  color: gold;
+  text-decoration: underline;
+}
+
+
+canvas#balanceChart {
+  margin-top: 20px;
+  background-color: #1c1c1c;
+  border-radius: 8px;
+  padding: 10px;
+}
