@@ -37,3 +37,23 @@ queue:
   database: kasyno_queue_production
   username: <%= ENV['PGUSER'] %>
   password: <%= ENV['PGPASSWORD'] %>
+
+
+cache:
+  <<: *default
+  database: kasyno_cache_production
+  username: <%= ENV['PGUSER'] %>
+  password: <%= ENV['PGPASSWORD'] %>
+
+storage:
+  <<: *default
+  database: kasyno_storage_production
+  username: <%= ENV['PGUSER'] %>
+  password: <%= ENV['PGPASSWORD'] %>
+
+
+recurring:
+  <<: *default
+  database: kasyno_recurring_production
+  username: <%= ENV['PGUSER'] %>
+  password: <%= ENV['PGPASSWORD'] %>
