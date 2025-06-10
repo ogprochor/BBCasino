@@ -1,10 +1,22 @@
+<!--
+Partial wyświetlający komunikaty o błędach walidacji dla danego zasobu (np. modelu użytkownika).
+
+- Sprawdza, czy obiekt `resource` ma jakieś błędy walidacji (`resource.errors.any?`).
+- Jeśli tak, tworzy sekcję z id `error_explanation`, która zawiera:
+  - Nagłówek informujący, ile błędów wystąpiło oraz dla jakiego modelu (z wykorzystaniem tłumaczeń I18n).
+  - Listę wszystkich pełnych komunikatów błędów (`resource.errors.full_messages`), gdzie każdy jest wyświetlany jako osobny element listy `<li>`.
+- `data-turbo-cache="false"` zapobiega cache'owaniu błędów przez Hotwire Turbo (w przypadku dynamicznych formularzy).
+
+Cel:
+- Pokazać użytkownikowi wszystkie błędy walidacji, które wystąpiły przy próbie zapisania lub zmodyfikowania zasobu.
+-->
 <% if resource.errors.any? %>
   <div id="error_explanation" data-turbo-cache="false">
     <h2>
       <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,
                  resource: resource.class.model_name.human.downcase)
-       %>
+      %>
     </h2>
     <ul>
       <% resource.errors.full_messages.each do |message| %>

@@ -1,3 +1,19 @@
+<!--
+Partial generujący zestaw linków nawigacyjnych pomocnych przy autoryzacji i rejestracji użytkownika.
+
+Linki są wyświetlane warunkowo, w zależności od aktualnego kontrolera oraz włączonych modułów Devise:
+
+- Jeśli aktualny kontroler to nie 'sessions', wyświetla link "Log in".
+- Jeśli moduł rejestracji jest aktywny (registerable?) i nie jesteśmy na stronie rejestracji, pokazuje link "Sign up".
+- Jeśli włączona jest funkcja odzyskiwania hasła (recoverable?) i nie jesteśmy na stronach resetu hasła ani rejestracji, pojawia się link "Forgot your password?".
+- Jeśli aktywny jest moduł potwierdzania konta (confirmable?) i nie jesteśmy na stronie potwierdzenia, pojawia się link "Didn't receive confirmation instructions?".
+- Jeśli konto można odblokować przez e-mail (lockable? z unlock_strategy_enabled?(:email)) i nie jesteśmy na stronie odblokowania, pokazuje się link "Didn't receive unlock instructions?".
+- Jeśli włączona jest obsługa OmniAuth (omniauthable?), wyświetla przyciski logowania za pomocą zewnętrznych providerów OAuth (np. Google, Facebook).
+
+Ułatwia to użytkownikowi poruszanie się między stronami logowania, rejestracji, resetu hasła, potwierdzenia konta oraz odblokowania konta.
+
+Dodatkowo, przyciski logowania przez OmniAuth mają atrybut `data: { turbo: false }`, aby wyłączyć obsługę Turbo Drive dla tych akcji (unikając potencjalnych problemów z przekierowaniami).
+-->
 <%- if controller_name != 'sessions' %>
   <%= link_to "Log in", new_session_path(resource_name) %><br />
 <% end %>

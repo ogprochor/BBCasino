@@ -1,3 +1,14 @@
+<!--
+Szablon wiadomości e-mail informującej użytkownika o zmianie adresu e-mail.
+
+- @resource: instancja użytkownika, która zmieniła adres e-mail.
+- @email: aktualny (lub poprzedni) adres e-mail użytkownika.
+- Jeśli zmiana e-maila wymaga potwierdzenia, w wiadomości wyświetlany jest nowy, niepotwierdzony adres (@resource.unconfirmed_email).
+- W przeciwnym razie informujemy, że adres e-mail został już zmieniony na nowy (@resource.email).
+
+Cel maila:
+- Powiadomienie użytkownika o zmianie e-maila dla bezpieczeństwa i kontroli konta.
+-->
 <p>Hello <%= @email %>!</p>
 
 <% if @resource.try(:unconfirmed_email?) %>

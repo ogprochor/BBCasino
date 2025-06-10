@@ -1,3 +1,19 @@
+<!--
+Widok formularza rejestracji nowego użytkownika.
+
+- `form_for` tworzy formularz wysyłający dane do endpointu rejestracji (metoda POST).
+- `resource` to instancja modelu użytkownika Devise.
+- Pola formularza:
+  - email — pole do podania adresu e-mail.
+  - password — pole do podania hasła użytkownika.
+    - Wyświetla informację o minimalnej długości hasła, jeśli jest dostępna.
+  - password_confirmation — potwierdzenie hasła.
+- Po kliknięciu przycisku „Sign up” dane są przesyłane do serwera w celu utworzenia nowego konta.
+- Renderowany jest dodatkowo widok `devise/shared/links`, który zawiera odnośniki pomocnicze (np. logowanie, reset hasła).
+
+Cel:
+- Umożliwić nowemu użytkownikowi założenie konta w aplikacji.
+-->
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -11,7 +27,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>

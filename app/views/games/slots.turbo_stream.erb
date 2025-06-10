@@ -1,13 +1,18 @@
 <%= turbo_stream.update "slot-frame" do %>
+  <!-- Aktualizacja zawartości turbo-frame o ID "slot-frame"
+       (czyli tej części strony, gdzie wyświetlane są symbole i wynik gry) -->
   <div class="slot-container">
+    <!-- Wyświetlenie wylosowanych symboli -->
     <div class="slot"><%= @symbols[0] %></div>
     <div class="slot"><%= @symbols[1] %></div>
     <div class="slot"><%= @symbols[2] %></div>
-    
   </div>
-<p class="result"><%= @result %></p>
+
+  <!-- Wyświetlenie wyniku gry (np. "Wygrałeś!" albo "Przegrałeś!") -->
+  <p class="result"><%= @result %></p>
 <% end %>
 
 <%= turbo_stream.update "user-balance" do %>
+  <!-- Aktualizacja salda użytkownika po grze -->
   <p>💰 Saldo: <%= current_user.wallet&.balance || 0 %> żetonów</p>
 <% end %>

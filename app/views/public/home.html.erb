@@ -1,24 +1,34 @@
 <div class="casino-home" style="background: url(<%= asset_path('casino-bg.jpg') %>) center/cover no-repeat;; min-height: 100vh; color: #fff; text-align: center; padding-top: 100px; font-family: 'Helvetica Neue', sans-serif;">
+  <!-- Tło strony głównej kasyna — pełnoekranowe, z obrazem w tle -->
+
   <div style="background-color: rgba(0, 0, 0, 0.7); padding: 40px; border-radius: 16px; display: inline-block;">
+    <!-- Półprzezroczyste ciemne tło, by poprawić czytelność treści -->
+
     <h1 style="font-size: 60px; font-weight: bold; color: gold; text-shadow: 2px 2px 5px black;">
       🎰 BBCasino Online 🎲
     </h1>
+    <!-- Tytuł witryny, efektowny z cieniowaniem -->
+
     <p style="font-size: 20px; margin: 20px 0; color: #ddd;">
       Zagraj i poczuj dreszcz emocji! Wybierz jedną z naszych gier.
     </p>
+    <!-- Krótki opis / zachęta -->
 
     <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
       <%= link_to 'Ruletka', roulette_path, class: 'game-button' %>
       <%= link_to 'Blackjack', blackjack_path, class: 'game-button' %>
       <%= link_to 'Sloty', slots_path, class: 'game-button' %>
     </div>
+    <!-- Trzy przyciski do gier – wyglądają jak złote kafelki -->
 
     <div style="margin-top: 40px;">
       <%= link_to 'Przejdź do konta', account_path, style: 'color: gold; font-weight: bold; text-decoration: underline; font-size: 18px;' %>
     </div>
+    <!-- Link do konta gracza -->
   </div>
 </div>
 
+<!-- Stylizacja przycisków gry -->
 <style>
     .game-button {
         background: linear-gradient(to right, #c59d5f, #d4af37);

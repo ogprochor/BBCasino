@@ -1,3 +1,14 @@
+<!--
+Szablon wiadomości e-mail z instrukcjami potwierdzenia konta użytkownika.
+
+- Wysłany automatycznie przez Devise po rejestracji lub na żądanie ponownego wysłania potwierdzenia.
+- @email: adres e-mail odbiorcy wiadomości.
+- @resource: instancja użytkownika (np. User lub AdminUser).
+- @token: unikalny token potwierdzający, używany do weryfikacji adresu e-mail.
+- link_to generuje URL do akcji potwierdzenia konta, który użytkownik powinien kliknąć, aby aktywować konto.
+
+Wiadomość zachęca użytkownika do potwierdzenia swojego adresu e-mail przez kliknięcie w link.
+-->
 <p>Welcome <%= @email %>!</p>
 
 <p>You can confirm your account email through the link below:</p>

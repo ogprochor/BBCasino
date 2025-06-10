@@ -1,17 +1,24 @@
+<!-- Nagłówek formularza rejestracji gracza -->
 <h2 style="color: white;">Rejestracja gracza 🧍‍♂️</h2>
 
+<!-- Formularz rejestracyjny (na razie bez faktycznego działania, bo url: "#" to placeholder) -->
 <%= form_with url: "#", method: "post", local: true do %>
+
+  <!-- Pole tekstowe na nick gracza -->
   <div>
     <label style="color:white;">Nick:</label>
     <%= text_field_tag :nick, "", required: true %>
   </div>
 
+  <!-- Pole tekstowe na e-mail gracza -->
   <div>
     <label style="color:white;">E-mail:</label>
     <%= email_field_tag :email, "", required: true %>
   </div>
 
+  <!-- Przycisk do wysłania formularza -->
   <div>
     <%= submit_tag "Zarejestruj się", style: "margin-top: 10px;" %>
   </div>
+
 <% end %>

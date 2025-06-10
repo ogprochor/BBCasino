@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<head>
+  <!-- Ustawienie typu treści i kodowania znaków -->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-  <body>
-    <%= yield %>
-  </body>
+  <style>
+      /*
+        Miejsce na style CSS dla e-maila.
+        UWAGA: w e-mailach większość klientów pocztowych obsługuje tylko style *inline*,
+        czyli np. <p style="color: red;">, dlatego to pole zwykle pozostaje puste.
+      */
+  </style>
+</head>
+
+<body>
+<!-- Główna treść e-maila zostanie podstawiona tutaj z szablonu wiadomości -->
+<%= yield %>
+</body>
 </html>

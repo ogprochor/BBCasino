@@ -1,3 +1,16 @@
+<!--
+Szablon wiadomości e-mail informującej użytkownika o zablokowaniu konta
+z powodu zbyt wielu nieudanych prób logowania.
+
+- @resource: instancja użytkownika, którego konto zostało zablokowane.
+- @resource.email: adres e-mail użytkownika.
+- @token: token odblokowujący konto.
+- link_to generuje link do akcji odblokowania konta, który użytkownik powinien kliknąć, aby przywrócić dostęp.
+
+Cel maila:
+- Powiadomienie o blokadzie konta.
+- Umożliwienie odblokowania konta za pomocą linku.
+-->
 <p>Hello <%= @resource.email %>!</p>
 
 <p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>

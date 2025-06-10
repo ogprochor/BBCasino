@@ -1,3 +1,18 @@
+<!--
+Widok formularza logowania użytkownika.
+
+- `form_for` tworzy formularz wysyłający dane do endpointu sesji (logowania).
+- `resource` to instancja modelu użytkownika Devise.
+- Pola formularza:
+  - email — pole do wpisania adresu e-mail użytkownika.
+  - password — pole do wpisania hasła.
+  - remember_me — (opcjonalnie) checkbox pozwalający zapamiętać sesję użytkownika, jeśli funkcja jest aktywna w konfiguracji Devise.
+- Po kliknięciu przycisku „Log in” dane są przesyłane do serwera, który uwierzytelnia użytkownika i tworzy sesję.
+- Renderowany jest dodatkowo widok `devise/shared/links`, zawierający pomocnicze odnośniki (np. rejestracja, reset hasła).
+
+Cel:
+- Umożliwić użytkownikowi zalogowanie się do aplikacji przy użyciu e-maila i hasła.
+-->
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

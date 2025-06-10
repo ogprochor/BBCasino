@@ -1,3 +1,21 @@
+<!--
+Widok formularza edycji profilu użytkownika (np. zmiana e-maila, hasła, awatara).
+
+- `form_for` generuje formularz wysyłający żądanie PUT do endpointu aktualizacji danych użytkownika.
+- `resource` to instancja modelu użytkownika.
+- Pola formularza:
+  - email — możliwość zmiany adresu e-mail.
+  - password — zmiana hasła (opcjonalna, można zostawić puste, jeśli nie chcemy zmieniać).
+  - password_confirmation — potwierdzenie nowego hasła.
+  - current_password — wymagane do potwierdzenia zmian (weryfikacja użytkownika).
+  - avatar — możliwość przesłania nowego zdjęcia profilowego (obsługa pliku).
+- Jeśli użytkownik ma włączoną funkcję confirmable i oczekuje na potwierdzenie nowego e-maila, wyświetla odpowiednią informację.
+- Sekcja „Cancel my account” umożliwia usunięcie konta po potwierdzeniu przez użytkownika.
+- Link „Back” pozwala wrócić do poprzedniej strony.
+
+Cel:
+- Umożliwić użytkownikowi edycję podstawowych danych konta i zarządzanie nim.
+-->
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put , multipart: true }) do |f| %>
@@ -30,7 +48,7 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
-  
+
   <div class="field">
     <%= f.label :avatar, "Awatar (zdjęcie profilowe)" %><br>
     <%= f.file_field :avatar %>

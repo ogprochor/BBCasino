@@ -1,3 +1,16 @@
+<!--
+Widok formularza umożliwiającego użytkownikowi ponowne wysłanie instrukcji potwierdzenia adresu email.
+Używany, gdy użytkownik nie otrzymał lub stracił oryginalny email z potwierdzeniem rejestracji.
+
+Formularz:
+- Pole email jest automatycznie uzupełniane aktualnym lub oczekującym na potwierdzenie adresem email.
+- Po wysłaniu formularza wywoływana jest akcja 'confirmations#create' Devise,
+  która odpowiada za wysłanie nowej instrukcji potwierdzenia.
+
+Dodatkowo:
+- Wyświetlane są komunikaty o błędach walidacji (jeśli występują).
+- W dolnej części widoku znajdują się dodatkowe linki pomocnicze z partiala "devise/shared/links".
+-->
 <h2>Resend confirmation instructions</h2>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>

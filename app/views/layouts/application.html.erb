@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Kasyno Online</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <%= javascript_importmap_tags %>
-  </head>
+<head>
+  <title>Kasyno Online</title>
 
-  <body>
-    <header>
-      <h1>🎰 Kasyno Online 🎰</h1>
-      <nav>
-	<%= link_to "🏠 Strona główna", root_path %> |
-        <%= link_to "Blackjack ♠️", blackjack_path %> |
-        <%= link_to "Ruletka 🎲", roulette_path %> |
-        <%= link_to "Jednoręki bandyta 🎰", slots_path %>
-      </nav>
-    </header>
-    <% if current_user %>
+  <!-- Tokeny CSRF (ochrona przed fałszywymi żądaniami POST) -->
+  <%= csrf_meta_tags %>
+
+  <!-- Polityka bezpieczeństwa treści (CSP) -->
+  <%= csp_meta_tag %>
+
+  <!-- Główny arkusz CSS z Rails (z Turbo do odświeżania stylów po zmianie) -->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+  <!-- Zewnętrzny skrypt Chart.js do wykresów -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Ładowanie plików JS przez importmap (Rails 7) -->
+  <%= javascript_importmap_tags %>
+</head>
+
+<body>
+<!-- Nagłówek strony z tytułem i nawigacją -->
+<header>
+  <h1>🎰 Kasyno Online 🎰</h1>
+  <nav>
+    <%= link_to "🏠 Strona główna", root_path %> |
+    <%= link_to "Blackjack ♠️", blackjack_path %> |
+    <%= link_to "Ruletka 🎲", roulette_path %> |
+    <%= link_to "Jednoręki bandyta 🎰", slots_path %>
+  </nav>
+</header>
+
+<!-- Panel użytkownika widoczny tylko, jeśli użytkownik jest zalogowany -->
+<% if current_user %>
   <div class="user-panel">
+    <!-- Przycisk rozwijający menu użytkownika z awatarem -->
     <button id="user-toggle" class="user-button">
       <%= image_tag(
-        current_user.avatar.attached? ? url_for(current_user.avatar) : asset_path("default_avatar.png"),
-        class: "user-avatar"
-      ) %>
+            current_user.avatar.attached? ? url_for(current_user.avatar) : asset_path("default_avatar.png"),
+            class: "user-avatar"
+          ) %>
       <span class="user-name"><%= current_user.username || current_user.email %></span>
       ⏷
     </button>
 
+    <!-- Menu użytkownika (saldo, linki do konta, edycji, wylogowania) -->
     <div id="user-menu" class="user-menu hidden">
+      <!-- Saldo aktualizowane przez Turbo Frame -->
       <turbo-frame id="user-balance">
         <p>💰 Saldo: <%= current_user.wallet&.balance || 0 %> żetonów</p>
       </turbo-frame>
@@ -40,40 +56,45 @@
     </div>
   </div>
 <% else %>
+  <!-- Link do logowania, gdy użytkownik nie jest zalogowany -->
   <div class="user-panel">
     <%= link_to "🔑 Zaloguj", new_user_session_path, class: "user-login" %>
   </div>
 <% end %>
 
+<!-- Główna treść strony -->
+<main>
+  <%= yield %> <!-- Tu ładowane są widoki stron -->
+</main>
 
-</div>
-    <main>
-      <%= yield %>
-    </main>
+<!-- Stopka -->
+<footer>
+  <p>&copy; 2025 Kasyno Online</p>
+</footer>
 
-    <footer>
-      <p>&copy; 2025 Kasyno Online</p>
-    </footer>
+<!-- Skrypt JS do rozwijania/zamykania menu użytkownika -->
 <script>
-  console.log("🚀 JS załadowany");
-  document.addEventListener("turbo:load", function () {
-    const toggle = document.getElementById("user-toggle");
-    const menu = document.getElementById("user-menu");
+    console.log("🚀 JS załadowany");
 
-    if (toggle && menu) {
-      toggle.addEventListener("click", () => {
-        menu.classList.toggle("show");
-        menu.classList.toggle("hidden");
-      });
+    document.addEventListener("turbo:load", function () {
+        const toggle = document.getElementById("user-toggle");
+        const menu = document.getElementById("user-menu");
 
-      document.addEventListener("click", function (e) {
-        if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-          menu.classList.add("hidden");
-          menu.classList.remove("show");
+        if (toggle && menu) {
+            toggle.addEventListener("click", () => {
+                menu.classList.toggle("show");
+                menu.classList.toggle("hidden");
+            });
+
+            // Zamykanie menu po kliknięciu poza nim
+            document.addEventListener("click", function (e) {
+                if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.add("hidden");
+                    menu.classList.remove("show");
+                }
+            });
         }
-      });
-    }
-  });
+    });
 </script>
-  </body>
+</body>
 </html>

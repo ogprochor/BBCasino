@@ -1,11 +1,15 @@
+<!-- Turbo Stream: aktualizacja ramki z wynikiem ruletki -->
 <turbo-stream target="roulette-frame" action="update">
   <template>
+    <!-- Wstawienie wyniku zakręcenia ruletką do ramki -->
     <p class="result"><%= @result %></p>
   </template>
 </turbo-stream>
 
+<!-- Turbo Stream: aktualizacja salda użytkownika -->
 <turbo-stream target="user-balance" action="update">
   <template>
+    <!-- Wyświetlenie aktualnego salda portfela użytkownika -->
     <p>💰 Saldo: <%= current_user.wallet&.balance || 0 %> żetonów</p>
   </template>
 </turbo-stream>

@@ -1,3 +1,19 @@
+<!--
+Widok formularza zmiany hasła użytkownika.
+
+- Używa helpera `form_for` do wygenerowania formularza wysyłającego żądanie PUT na endpoint zmiany hasła.
+- `resource` to instancja modelu użytkownika (np. User).
+- Pole ukryte `reset_password_token` zawiera token potrzebny do autoryzacji zmiany hasła.
+- Pola formularza:
+  - Nowe hasło (`password`) z podpowiedzią minimalnej długości.
+  - Potwierdzenie nowego hasła (`password_confirmation`).
+- Po wysłaniu formularza następuje aktualizacja hasła.
+- W razie błędów walidacji, zostaną one wyświetlone za pomocą partiala `devise/shared/error_messages`.
+- Pod formularzem znajdują się dodatkowe linki z partiala `devise/shared/links` (np. logowanie, rejestracja).
+
+Cel:
+- Pozwolić użytkownikowi bezpiecznie ustawić nowe hasło po żądaniu resetu.
+-->
 <h2>Change your password</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>

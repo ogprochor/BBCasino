@@ -1,3 +1,13 @@
+<!--
+Partial wyświetlający widok jednego rzutu automatu slotowego.
+
+- `symbols` to tablica trzech symboli (np. emoji lub nazw ikon), które są pokazane jako wynik obrotu.
+- Każdy symbol jest umieszczony w osobnym elemencie div z klasą "slot" dla stylizacji.
+- Jeśli dostępny jest wynik `result` (np. informacja o wygranej lub przegranej),
+  jest on wyświetlany poniżej symboli w paragrafie z klasą "result".
+
+Ten partial można wykorzystywać do aktualizacji stanu automatu po każdym obrocie.
+-->
 <div class="slot-container">
   <div class="slot"><%= symbols[0] %></div>
   <div class="slot"><%= symbols[1] %></div>

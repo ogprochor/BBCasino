@@ -1,44 +1,48 @@
 <h1>🎲 Ruletka</h1>
 
-<%= form_with url: spin_roulette_path, method: :post, local: true do |f| %>
+<%= form_with url: spin_roulette_path, method: :post, local: true do |f| %> <!-- Formularz do wykonania zakręcenia ruletką -->
   <p>
     <label>Wybierz kolor lub numer (0–36):</label><br>
-    <%= text_field_tag :choice, nil, placeholder: "np. czerwony, czarny, 7" %>
+    <%= text_field_tag :choice, nil, placeholder: "np. czerwony, czarny, 7" %> <!-- Pole tekstowe do wyboru koloru lub numeru -->
   </p>
   <p>
     <label>Zakład:</label><br>
-    <%= number_field_tag :bet, 10, min: 1 %>
+    <%= number_field_tag :bet, 10, min: 1 %> <!-- Pole numeryczne do wpisania wysokości zakładu, domyślnie 10 -->
   </p>
-  <%= f.submit "Zakręć!", class: "spin-button" %>
+  <%= f.submit "Zakręć!", class: "spin-button" %> <!-- Przycisk wysyłający formularz -->
 <% end %>
 
-<turbo-frame id="roulette-frame">
-  <% if @result %>
-    <p class="result"><%= @result %></p>
+<turbo-frame id="roulette-frame"> <!-- Turbo Frame do dynamicznego przeładowywania wyniku bez przeładowania strony -->
+  <% if @result %> <!-- Jeśli jest wynik gry -->
+    <p class="result"><%= @result %></p> <!-- Wyświetl wynik -->
   <% end %>
-<turbo-frame>
-<style>
-  h1 {
-    color: gold;
-    margin-top: 1em;
-  }
+  </turbo-frame>
 
-  .spin-button {
-    padding: 10px 30px;
-    font-size: 1.2em;
-    background-color: crimson;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
+    <style>
+        /* Styl nagłówka */
+        h1 {
+            color: gold;
+            margin-top: 1em;
+        }
 
-  .spin-button:hover {
-    background-color: darkred;
-  }
+        /* Styl przycisku */
+        .spin-button {
+            padding: 10px 30px;
+            font-size: 1.2em;
+            background-color: crimson;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-  .result {
-    margin-top: 20px;
-    font-size: 1.4em;
-  }
-</style>
+        .spin-button:hover {
+            background-color: darkred;
+        }
+
+        /* Styl tekstu wyniku */
+        .result {
+            margin-top: 20px;
+            font-size: 1.4em;
+        }
+    </style>

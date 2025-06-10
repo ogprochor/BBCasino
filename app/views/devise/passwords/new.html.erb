@@ -1,3 +1,17 @@
+<!--
+Widok formularza umożliwiającego użytkownikowi rozpoczęcie procesu resetowania hasła.
+
+- `form_for` generuje formularz wysyłający żądanie POST do akcji tworzenia resetu hasła.
+- `resource` to instancja modelu użytkownika (np. User).
+- Pole formularza:
+  - email — użytkownik podaje swój adres e-mail powiązany z kontem.
+- Po wysłaniu formularza, jeśli adres istnieje w bazie, zostanie wysłany mail z instrukcjami resetu.
+- Błędy walidacji (np. brak podania e-maila) są wyświetlane przez partial `devise/shared/error_messages`.
+- Pod formularzem znajdują się dodatkowe linki (np. do logowania, rejestracji) z partiala `devise/shared/links`.
+
+Cel:
+- Umożliwić użytkownikowi rozpoczęcie resetu hasła, aby odzyskać dostęp do konta.
+-->
 <h2>Forgot your password?</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>

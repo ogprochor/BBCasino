@@ -1,64 +1,72 @@
 <h1 class="title">Jednoręki Bandyta</h1>
 
+<!-- Przycisk wysyłający POST do slots_path, uruchamiający losowanie symboli.
+     Odpowiedź zostanie załadowana w turbo-frame "slot-frame" bez przeładowania strony -->
 <%= button_to "Zakręć!", slots_path, method: :post, form: { data: { turbo_frame: "slot-frame" } }, class: "spin-button" %>
 
-<turbo-frame id="slot-frame">
+<turbo-frame id="slot-frame"> <!-- Turbo Frame pozwala na dynamiczne ładowanie wyników gry -->
   <div class="slot-container">
-    <% if @symbols %>
+    <% if @symbols %> <!-- Jeżeli wylosowano symbole, wyświetl je -->
       <div class="slot"><%= @symbols[0] %></div>
       <div class="slot"><%= @symbols[1] %></div>
       <div class="slot"><%= @symbols[2] %></div>
-    <% else %>
+    <% else %> <!-- Jeśli gra jeszcze się nie rozpoczęła, pokaż znaki zapytania -->
       <div class="slot">❓</div>
       <div class="slot">❓</div>
       <div class="slot">❓</div>
     <% end %>
   </div>
 
-  <% if @result %>
+  <% if @result %> <!-- Jeżeli jest wynik (np. "Wygrałeś!" lub "Spróbuj ponownie") -->
     <p class="result"><%= @result %></p>
   <% end %>
 </turbo-frame>
 
+<!-- Style CSS -->
 <style>
-  .title {
-    text-align: center;
-    font-size: 2em;
-    margin-top: 1em;
-  }
-  .slot-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-  }
-  .slot {
-    font-size: 3em;
-    margin: 0 15px;
-    border: 3px solid #888;
-    border-radius: 10px;
-    padding: 20px;
-    background: #eee;
-    min-width: 60px;
-    text-align: center;
-  }
-  .spin-button {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 30px;
-    font-size: 1.2em;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  .spin-button:hover {
-    background-color: #45a049;
-  }
-  .result {
-    text-align: center;
-    font-size: 1.4em;
-    color: #333;
-    margin-top: 20px;
-  }
+    .title {
+        text-align: center;
+        font-size: 2em;
+        margin-top: 1em;
+    }
+
+    .slot-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+    }
+
+    .slot {
+        font-size: 3em;
+        margin: 0 15px;
+        border: 3px solid #888;
+        border-radius: 10px;
+        padding: 20px;
+        background: #eee;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    .spin-button {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 30px;
+        font-size: 1.2em;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .spin-button:hover {
+        background-color: #45a049;
+    }
+
+    .result {
+        text-align: center;
+        font-size: 1.4em;
+        color: #333;
+        margin-top: 20px;
+    }
 </style>

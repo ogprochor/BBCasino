@@ -1,3 +1,18 @@
+<!--
+Strona formularza umożliwiająca użytkownikowi ponowne wysłanie instrukcji odblokowania konta.
+
+Użytkownik podaje swój adres e-mail, na który zostanie wysłany link do odblokowania konta,
+jeśli konto zostało zablokowane z powodu nadmiernej liczby nieudanych prób logowania.
+
+Po wysłaniu formularza dane trafiają do akcji `create` kontrolera `Devise::UnlocksController`,
+gdzie następuje wysłanie maila z instrukcjami odblokowania.
+
+W przypadku błędów (np. brak użytkownika z podanym e-mailem) wyświetlane są komunikaty błędów
+za pomocą partiala `devise/shared/error_messages`.
+
+Na dole znajduje się zestaw linków pomocniczych (logowanie, rejestracja itd.) z partiala
+`devise/shared/links`.
+-->
 <h2>Resend unlock instructions</h2>
 
 <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>

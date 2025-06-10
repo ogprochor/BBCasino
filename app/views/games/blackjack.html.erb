@@ -1,54 +1,56 @@
 <h1>🃏 Blackjack</h1>
 
-<% if current_user %>
-  <p><strong>Saldo:</strong> 💰 <%= current_user.wallet&.balance || 0 %> żetonów</p>
+<% if current_user %> <!-- Sprawdza, czy użytkownik jest zalogowany -->
+  <p><strong>Saldo:</strong> 💰 <%= current_user.wallet&.balance || 0 %> żetonów</p> <!-- Wyświetla saldo żetonów użytkownika -->
 
-  <% if @player_cards.blank? %>
-    <%= form_with url: blackjack_deal_path, method: :post, local: true do %>
+  <% if @player_cards.blank? %> <!-- Sprawdza, czy gracz jeszcze nie ma kart (czyli przed rozdaniem) -->
+    <%= form_with url: blackjack_deal_path, method: :post, local: true do %> <!-- Formularz do rozpoczęcia rozdania -->
       <label>Zakład:</label><br>
-      <%= number_field_tag :bet, 10, min: 1 %><br><br>
-      <%= submit_tag "Rozdaj karty", class: "spin-button" %>
+      <%= number_field_tag :bet, 10, min: 1 %><br><br> <!-- Pole do wpisania kwoty zakładu, domyślnie 10 -->
+      <%= submit_tag "Rozdaj karty", class: "spin-button" %> <!-- Przycisk rozpoczęcia gry -->
     <% end %>
-  <% else %>
-    <p><strong>Twoje karty:</strong> <%= @player_cards.join(', ') %> (suma: <%= @player_cards.sum %>)</p>
-    <p><strong>Karty krupiera:</strong> <%= @dealer_cards.join(', ') %> (suma: <%= @dealer_cards.sum %>)</p>
+  <% else %> <!-- Jeśli gracz ma już rozdane karty -->
+    <p><strong>Twoje karty:</strong> <%= @player_cards.join(', ') %> (suma: <%= @player_cards.sum %>)</p> <!-- Pokazuje karty gracza i ich sumę -->
+    <p><strong>Karty krupiera:</strong> <%= @dealer_cards.join(', ') %> (suma: <%= @dealer_cards.sum %>)</p> <!-- Pokazuje karty krupiera i ich sumę -->
 
-    <% unless @result %>
-      <%= button_to "Dobierz kartę", blackjack_hit_path, method: :post, class: "spin-button" %>
-      <%= button_to "Zatrzymaj się", blackjack_stand_path, method: :post, class: "spin-button" %>
+    <% unless @result %> <!-- Jeśli gra jeszcze trwa (brak wyniku) -->
+      <%= button_to "Dobierz kartę", blackjack_hit_path, method: :post, class: "spin-button" %> <!-- Przycisk dobierania karty -->
+      <%= button_to "Zatrzymaj się", blackjack_stand_path, method: :post, class: "spin-button" %> <!-- Przycisk zatrzymania się -->
     <% end %>
 
-    <% if @result %>
-      <p class="result"><%= @result %></p>
-      <%= button_to "Zagraj ponownie", blackjack_deal_path, method: :post, class: "spin-button" %>
+    <% if @result %> <!-- Jeśli gra się zakończyła -->
+      <p class="result"><%= @result %></p> <!-- Wyświetla wynik gry -->
+      <%= button_to "Zagraj ponownie", blackjack_deal_path, method: :post, class: "spin-button" %> <!-- Przycisk do zagrania ponownie -->
     <% end %>
   <% end %>
 
-  <% if flash[:notice] %>
-    <p class="result"><%= flash[:notice] %></p>
+  <% if flash[:notice] %> <!-- Jeśli jest komunikat flash -->
+    <p class="result"><%= flash[:notice] %></p> <!-- Wyświetla komunikat -->
   <% end %>
-<% else %>
-  <p>Musisz być zalogowany, aby zagrać w blackjacka.</p>
+<% else %> <!-- Jeśli użytkownik nie jest zalogowany -->
+  <p>Musisz być zalogowany, aby zagrać w blackjacka.</p> <!-- Informuje o konieczności logowania -->
 <% end %>
 
 <style>
-  .spin-button {
-    padding: 10px 30px;
-    font-size: 1.1em;
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
+    /* Stylizacja przycisków */
+    .spin-button {
+        padding: 10px 30px;
+        font-size: 1.1em;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
 
-  .spin-button:hover {
-    background-color: #1976D2;
-  }
+    .spin-button:hover {
+        background-color: #1976D2;
+    }
 
-  .result {
-    margin-top: 20px;
-    font-size: 1.4em;
-    color: gold;
-  }
+    /* Stylizacja tekstu wyniku */
+    .result {
+        margin-top: 20px;
+        font-size: 1.4em;
+        color: gold;
+    }
 </style>
